@@ -1,5 +1,5 @@
-const { auth, jwt_mid } = require('../middlewares');
-const { createGroup } = require('../controllers/groups.controller');
+const { groups, jwt_mid } = require('../middlewares');
+const { createGroup, editGroup } = require('../controllers/groups.controller');
 
 module.exports = function(app) {
   app.use( (req, res, next) => {
@@ -10,7 +10,8 @@ module.exports = function(app) {
     next();
   });
   app.use(jwt_mid.verifyToken)
-
+  
   app.post('/createGroup', createGroup);
+  app.post('/editGroup', [ groups.validator('editGroup'), groups.checkAdmin ], editGroup);
   // app.post('/signin', [auth.checkEmptyFieldsSignIn], signin);
 }
