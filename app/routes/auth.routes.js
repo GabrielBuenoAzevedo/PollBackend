@@ -1,4 +1,4 @@
-const { auth, jwt_mid } = require('../middlewares');
+const { auth_mid, jwt_mid } = require('../middlewares');
 const { signin, signup } = require('../controllers/auth.controller');
 
 module.exports = function(app) {
@@ -9,8 +9,8 @@ module.exports = function(app) {
     );
     next();
   });
-  app.use(auth.sanitizeInput);
+  app.use(auth_mid.sanitizeInput);
 
-  app.post('/signup', [auth.checkEmptyFieldsSignUp , auth.checkUsernameAndEmail], signup);
-  app.post('/signin', [auth.checkEmptyFieldsSignIn], signin);
+  app.post('/signup', [auth_mid.checkEmptyFieldsSignUp , auth_mid.checkUsernameAndEmail], signup);
+  app.post('/signin', [auth_mid.checkEmptyFieldsSignIn], signin);
 }

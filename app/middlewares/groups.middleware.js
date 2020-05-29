@@ -1,5 +1,5 @@
 const { Group, User } = require('../models');
-const { check } = require('express-validator')
+const { check } = require('express-validator');
 
 //Check if user is this group admin
 exports.checkAdmin = async(req, res, next) => {
