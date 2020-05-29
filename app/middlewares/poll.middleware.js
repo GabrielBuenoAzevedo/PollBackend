@@ -12,6 +12,21 @@ exports.checkUserGroup = async (req, res, next) => {
   }
 }
 
+//Check if poll exists
+exports.checkPoll = async (req, res, next) => {
+  const poll = Poll.findById(req.body.pollId).then( poll => {
+    if (poll !== null) {
+      req.mid = {
+        ...req.mid,
+        poll
+      };
+      next();
+    } else {
+      res.status(502).send({message: "This poll doesn't exist."});
+    }
+  })
+}
+
 //Check fields
 exports.validator = (functionName) => {
   switch (functionName) {
