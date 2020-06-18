@@ -1,4 +1,4 @@
-const { Group, User, Poll } = require('../models');
+const { Group, Poll } = require('../models');
 const { validationResult } = require('express-validator');
 
 //Create poll

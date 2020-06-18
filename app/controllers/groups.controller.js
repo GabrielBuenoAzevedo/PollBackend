@@ -1,4 +1,4 @@
-const { User, Group } = require('../models');
+const { Group } = require('../models');
 const { validationResult } = require('express-validator');
 
 //Create a group
@@ -11,7 +11,7 @@ exports.createGroup = (req, res) => {
   });
   return group.save().then( async doc => {
     console.log(doc);
-    const user = await User.findById(req.userId).exec();
+    const user = req.dbData.user;
     user.joinGroup(doc.id, 'admin');
     res.send({ message: 'Group created! '});
   }).catch( err => {

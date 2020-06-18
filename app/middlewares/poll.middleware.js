@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 //Check if user is on the group
 exports.checkUserGroup = async (req, res, next) => {
-  const user = await User.findById(req.userId).exec();
+  const user = req.dbData.user;
   const userRole = user.groups.get(req.body.groupId);
   if (userRole !== undefined) {
     next();

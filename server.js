@@ -20,13 +20,14 @@ db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`
   console.log(err);
 });
 
-//routes
-require('./app/routes')(app);
-
-app.get('/', (req, res) => {
-  res.json({ message: "Oie" })
+//Create middleware to initiate dbData inside request.
+app.use((req,res,next) => {
+  req.dbData = {};
+  next();
 });
 
+//routes
+require('./app/routes')(app);
 
 app.listen(port, () => {
   console.log('Abriu o server');

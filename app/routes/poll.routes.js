@@ -1,4 +1,4 @@
-const { poll_mid, jwt_mid } = require('../middlewares');
+const { poll_mid, jwt_mid, user_mid } = require('../middlewares');
 const { createPoll } = require('../controllers/poll.controller');
 
 module.exports = function(app) {
@@ -11,5 +11,5 @@ module.exports = function(app) {
   });
   app.use(jwt_mid.verifyToken);
 
-  app.post('/createPoll', [ poll_mid.validator('createPoll'), poll_mid.checkUserGroup ], createPoll );
+  app.post('/createPoll', [ poll_mid.validator('createPoll'), user_mid.getTokenUser, poll_mid.checkUserGroup ], createPoll );
 }
