@@ -1,4 +1,4 @@
-const { jwt_mid, user_mid } = require('../middlewares')
+const { jwt_mid, user_mid, groups_mid } = require('../middlewares')
 const userController = require('../controllers/user.controller')
 
 module.exports = (app) => {
@@ -11,7 +11,7 @@ module.exports = (app) => {
   });
   app.use(jwt_mid.verifyToken);
 
-  app.post('/teste', user_mid.getTokenUser ,userController.teste)
+  app.post('/leaveGroup', [ user_mid.getTokenUser, groups_mid.getGroup ] ,userController.leaveGroup)
   // (req, res) => {
     // userController.joinGroup(req.userId, '123123123', 'admin');
   // })

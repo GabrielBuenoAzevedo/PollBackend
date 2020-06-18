@@ -1,9 +1,10 @@
 const { User } = require('../models');
 
-
-exports.teste = (req, res) => {
-  User.findById(req.userId).exec( (err, user) => {
-    // user.joinGroup('5ec5c25bd9ca2f9260a1f014', 'admin')
-    res.send('aoopa');
-  })
+//Makes user leave a group.
+exports.leaveGroup = (req, res) => {
+  const user = req.dbData.user;
+  const group = req.dbData.group;
+  user.leaveGroup(group._id)
+    .then( result => res.send({message: result.message}) )
+    .catch( err => {throw err} );
 }
