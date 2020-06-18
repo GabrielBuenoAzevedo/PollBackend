@@ -26,7 +26,6 @@ checkUsernameAndEmail = async  (req, res, next) => {
     res.status(500).send({ message: 'Username already taken.' });
     return;
   }
-
   //Check if email exists
   const emailQuery = User.findOne({ email: req.body.email });
   const emailResult = await emailQuery.exec();
@@ -34,7 +33,6 @@ checkUsernameAndEmail = async  (req, res, next) => {
     res.status(500).send({ message: 'Email already taken.' });
     return;
   }
-
   next();
 } 
 

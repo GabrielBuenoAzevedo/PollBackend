@@ -1,5 +1,6 @@
 const { User } = require('../models')
 
+//Get user from userId inside the token.
 exports.getTokenUser = async (req, res, next) => {
   if (!req.userId){
     res.status(505).send({error: 'UserId not found inside given token.'})

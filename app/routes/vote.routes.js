@@ -11,5 +11,5 @@ module.exports = (app) => {
   });
   app.use(jwt_mid.verifyToken);
 
-  app.post('/pollVote', poll_mid.checkPoll, voteInPoll)
+  app.post('/pollVote', poll_mid.getPoll, voteInPoll)
 }

@@ -1,4 +1,4 @@
-const { Group, Vote, Poll } = require('../models');
+const { Vote } = require('../models');
 
 //Create or edit a vote on a poll
 exports.voteInPoll = async (req, res) => {

@@ -13,13 +13,10 @@ exports.checkUserGroup = async (req, res, next) => {
 }
 
 //Check if poll exists
-exports.checkPoll = async (req, res, next) => {
+exports.getPoll = async (req, res, next) => {
   const poll = Poll.findById(req.body.pollId).then( poll => {
     if (poll !== null) {
-      req.mid = {
-        ...req.mid,
-        poll
-      };
+      req.dbData.poll = poll;
       next();
     } else {
       res.status(502).send({message: "This poll doesn't exist."});

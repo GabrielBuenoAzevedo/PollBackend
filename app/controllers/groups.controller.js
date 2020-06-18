@@ -10,7 +10,6 @@ exports.createGroup = (req, res) => {
     public: req.body.public === 'true'
   });
   return group.save().then( async doc => {
-    console.log(doc);
     const user = req.dbData.user;
     user.joinGroup(doc.id, 'admin');
     res.send({ message: 'Group created! '});
@@ -23,7 +22,7 @@ exports.createGroup = (req, res) => {
 exports.editGroup = async (req, res) => {
   const validation = validationResult(req);
   if (validation.errors.length === 0) {
-    const group = await Group.findById(req.body.groupId).exec();
+    const group = req.dbData.group;
     group.set({
       name: req.body.name ? req.body.name : group.name,
       description: req.body.description ? req.body.description : group.description,
